@@ -5,7 +5,7 @@ ENV LANG  C.UTF-8
 #RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list \
 #unoconv
 RUN        apt-get update \
-          && apt-get install -y tzdata imagemagick  procps  \
+          && apt-get install -y tzdata imagemagick  procps unoconv  \
           && ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone \
           && apt-get clean \
           && apt-get autoclean \
@@ -27,7 +27,8 @@ ENV JAVA_OPTS="-server -Xms4096m -Xmx4096M -Djava,security.egd=file:/dev/.urando
 ENV TOMCAT_NAME=nmup
 ENV TOMCAT_VERSION=9.0.31
 RUN mkdir /TRS/new-media
-RUN cd /TRS/APP/LibreOffice_5.3.6.1_Linux_x86-64_deb && dpkg -i /TRS/APP/LibreOffice_5.3.6.1_Linux_x86-64_deb/DEBS/*.deb  && rm -rf  /TRS/APP/LibreOffice_5.3.6.1_Linux_x86-64_deb
+# 包太大，到百度网盘下载
+# RUN cd /TRS/APP/LibreOffice_5.3.6.1_Linux_x86-64_deb && dpkg -i /TRS/APP/LibreOffice_5.3.6.1_Linux_x86-64_deb/DEBS/*.deb  && rm -rf  /TRS/APP/LibreOffice_5.3.6.1_Linux_x86-64_deb
 ADD apache-tomcat-9.0.31.tar.gz /TRS/new-media
 RUN mv /TRS/new-media/apache-tomcat-9.0.31 /TRS/new-media/nmup && rm -rf  /TRS/new-media/nmup/webapps/* && mkdir -p  /TRS/new-media/nmup/webapps/ROOT && echo "NMUP test" >> /TRS/new-media/nmup/webapps/ROOT/index.html && mkdir -p /TRS/new-media/nmup/WCMData 
 EXPOSE 8080 9877
