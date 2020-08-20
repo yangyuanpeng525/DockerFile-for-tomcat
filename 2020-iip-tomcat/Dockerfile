@@ -35,3 +35,5 @@ COPY ./run.sh /TRS/new-media/nmup
 VOLUME /TRS/new-media/nmup/WCMData
 VOLUME /TRS/new-media/nmup/logs
 CMD ["/TRS/new-media/nmup/run.sh", "run" ]
+
+#为了减小镜像大小，导入的安装包装完后要在镜像同一层删除，下一层镜像只读上一层镜像的内容，不能删，会导致镜像过大
