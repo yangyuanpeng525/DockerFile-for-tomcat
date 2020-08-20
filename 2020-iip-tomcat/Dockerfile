@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM registry.cn-hangzhou.aliyuncs.com/yangyuanpeng/debian:stretch-slim
 #设置utf8编码环境
 ENV LANG  C.UTF-8
 # 添加阿里云镜像源，设置中国时区,安装imagemagick
